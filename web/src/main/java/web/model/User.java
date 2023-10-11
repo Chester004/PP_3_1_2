@@ -1,4 +1,5 @@
-package web.models;
+package web.model;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,7 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -17,12 +20,18 @@ public class User {
     private Long id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, max = 20, message = "Name should be between 2 and 20 characters")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotEmpty(message = "Lastname should not be empty")
+    @Size(min = 2, max = 20, message = "Lastname should be between 2 and 20 characters")
     private String lastName;
 
     @Column(name = "email")
+    @NotEmpty(message = "Email is not be empty")
+    @Email(message = "Email is not valid")
     private String email;
 
     public User() {
